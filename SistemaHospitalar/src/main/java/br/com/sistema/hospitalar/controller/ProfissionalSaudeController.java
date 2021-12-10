@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.annotation.security.RolesAllowed;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,16 +21,6 @@ public class ProfissionalSaudeController {
 
     @Autowired
     private ProfisssionalSaudeService profisssionalSaudeService;
-
-//    @Autowired
-//    private ProfissionalSaudeRepository profisssionalSaudeRepository;
-
-
-//    @GetMapping("/contagem")
-//    public ProfissionalSaudeEntity findByNumberMedicByDepartament() {
-//        return (ProfissionalSaudeEntity) profisssionalSaudeRepository.findByNumberMedicByDepartament();
-//
-//    }
 
     @GetMapping("/contagem")
     public ResponseEntity<List<ProfissionalSaudeEntity>> findByNumberMedicByDepartament() {
@@ -53,6 +44,7 @@ public class ProfissionalSaudeController {
 
 
 
+    @RolesAllowed("admin")
     @PostMapping
     public ResponseEntity<ProfissionalSaudeEntity> insert(@RequestBody ProfissionalSaudeDTO profissionalSaudeDTO){
         ProfissionalSaudeEntity profissionalSaude = profisssionalSaudeService.fromDto(profissionalSaudeDTO);
@@ -63,7 +55,7 @@ public class ProfissionalSaudeController {
     }
 
 
-
+    @RolesAllowed("admin")
     @PutMapping
     @RequestMapping(value = "/{id}")
     public ResponseEntity<Void> update(@RequestBody ProfissionalSaudeDTO profissionalSaudeDTO, @PathVariable Long id){

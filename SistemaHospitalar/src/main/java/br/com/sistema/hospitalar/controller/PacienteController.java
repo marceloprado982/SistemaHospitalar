@@ -59,7 +59,6 @@ public class PacienteController {
         paciente = pacienteService.update(paciente);
         return ResponseEntity.noContent().build();
     }
-//
 
 
     @DeleteMapping("/{id}")
